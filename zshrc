@@ -90,6 +90,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### CUSTOMIZE
+source ~/.profile
 source ~/.bash_profile
 [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -110,20 +111,10 @@ bindkey '^Z' fancy-ctrl-z
 
 unsetopt share_history
 
-pushd() {
-    if [ $# -eq 0 ]; then
-        DIR="${HOME}"
-    else
-        DIR="$1"
-    fi
+### QT
+PATH="/usr/local/opt/qt/bin:$PATH"
 
-    builtin pushd "${DIR}" > /dev/null
-}
-
-popd() {
-    builtin popd > /dev/null
-}
-alias cd='pushd'
-alias bd='popd'
-###
-
+### pyenv
+PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init - zsh --no-rehash)"
+eval "$(pyenv virtualenv-init -)"
